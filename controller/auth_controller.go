@@ -3,6 +3,7 @@ package controller
 import (
 	"mall/global"
 	models "mall/model"
+	"mall/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -54,5 +55,12 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, gin.H{"message": "Login successfully"})
+	token, err := utils.GenerateJWT(input.Username) //生成JWTtoken
+
+	if err != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(200, gin.H{"message": "Login successfully", "token": token})
 }
