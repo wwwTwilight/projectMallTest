@@ -15,7 +15,7 @@ func GenerateJWT(username string) (string, error) {
 
 	signedToken, err := token.SignedString([]byte("secret")) // 设置加密密钥
 
-	return "Bearer" + signedToken, err
+	return "Bearer " + signedToken, err
 }
 
 func ParseJWT(tokenString string) (string, error) {

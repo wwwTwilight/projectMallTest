@@ -18,9 +18,10 @@ func SetupRouter() *gin.Engine {
 
 	trade := r.Group("/trade")
 	{
-		trade.GET("/list")
+		trade.GET("/list", controller.ShowItems)
+		trade.GET("/search", controller.SearchItem)
 		trade.Use(middlewwares.AuthMiddlewares()) // 需要登录
-		trade.POST("/create")
+		trade.POST("/create", controller.CreateItem)
 	}
 
 	return r
